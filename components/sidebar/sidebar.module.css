@@ -1,0 +1,61 @@
+#sidebar {
+  display: block;
+  width: 15%;
+  position: relative;
+  transform: translateX(0);
+}
+
+#asideWrapper {
+  width: 100%;
+  overflow-y: scroll;
+  position: fixed;
+  left: 0;
+  padding: 0 1.5rem 3rem calc(1rem - 0.8rem);
+  font-size: 0.9rem;
+  height: 100vh;
+  background-color: #0f0f0f;
+}
+
+.asideLink:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+#subscriptionTitle {
+  margin: 1rem;
+  font-size: 1rem;
+}
+
+#asideWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.asideLinkWrapper .asideLink {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  margin: 0.7rem;
+  margin-left: 0.5rem;
+  color: #fff;
+  width: 100%;
+  border-radius: 4%/20%;
+}
+
+.asideLinkWrapper {
+  border-bottom: 1px solid hsl(0, 0%, 18.82%);
+}
+
+#asideWrapper hr {
+  border: none;
+  border-bottom: 1px solid hsl(0, 0%, 18.82%);
+}
+
+.asideLink .creatorAvatars {
+  width: 2rem;
+  height: auto;
+  margin-right: 1.5rem;
+}
+
+.asideLinkLogo {
+  margin-right: 1rem;
+}

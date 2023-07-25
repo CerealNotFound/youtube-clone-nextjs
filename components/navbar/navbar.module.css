@@ -1,0 +1,161 @@
+#nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Roboto", sans-serif;
+  width: 100%;
+  background-color: #0f0f0f;
+}
+
+#hamburgerLogoWrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+#hamburger {
+  margin: 1rem;
+}
+
+#logo {
+  width: 28%;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+#supWrapper {
+  height: 5vh;
+  font-size: 0.6rem;
+  vertical-align: super;
+  color: #aaa;
+}
+
+#supText {
+  font-size: 0.65rem;
+  vertical-align: super;
+  color: #9b9b9b;
+}
+
+#mic {
+  padding: 0.5rem;
+  margin-left: 1rem;
+  border-radius: 50%;
+  background-color: #181818;
+}
+
+#mic:hover {
+  cursor: pointer;
+  background-color: hsla(0, 100%, 100%, 0.15);
+}
+
+#searchWrapper {
+  display: flex;
+  align-items: center;
+  width: 35%;
+  height: 5vh;
+  padding-top: 0;
+  border-radius: 4% 0 0 4%/ 50% 50%;
+}
+
+#searchBarWrapper {
+  display: flex;
+  align-items: center;
+  width: 70%;
+  height: auto;
+  padding: 0.44rem 0.5rem;
+  border-radius: 5% 0 0 5%/ 50% 50%;
+  background-color: hsl(0, 0%, 7%);
+  border: 1px solid hsl(0, 0%, 18.82%);
+}
+
+#searchBarWrapper:focus-within {
+  border: 1px solid #3ea6ff;
+}
+
+#searchBar {
+  background-color: hsl(0, 0%, 7%);
+  font-size: 1rem;
+  color: hsla(0, 100%, 100%, 0.88);
+  width: 100%;
+  outline: none;
+  border: none;
+}
+
+.searchIconSvg {
+  display: block;
+  width: 1.5rem;
+  height: auto;
+}
+
+#iconSearchbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 20% 20% 0/ 50% 50%;
+  width: 5vw;
+  height: 5vh;
+  border: 1px solid hsl(0, 0%, 18.82%);
+  border-left: none;
+  background-color: hsla(0, 100%, 100%, 0.08);
+}
+
+.searchbarIconSvg {
+  width: 1.5rem;
+  height: auto;
+}
+
+#rightIconsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 9%;
+  margin-right: 0.5rem;
+}
+
+#createIcon,
+#notifications {
+  padding: 0.5rem;
+  border-radius: 50%;
+}
+
+#notifications:hover,
+#createIcon:hover {
+  background-color: hsla(0, 100%, 100%, 0.15);
+  cursor: pointer;
+}
+
+#userAvatar {
+  width: 2rem;
+  height: auto;
+  margin: 0.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.logoutModalHidden {
+  display: none;
+}
+
+.logoutModal {
+  display: block;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20vw;
+  height: 10vh;
+  right: 1vw;
+  top: 3.5vw;
+  border-radius: 8px;
+  border: 1px solid hsl(0, 0%, 18.82%);
+  background: hsl(0, 0%, 7%);
+}
+
+#logoutButton {
+  background-color: rgb(192, 0, 0);
+  color: #fff;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 3px;
+}

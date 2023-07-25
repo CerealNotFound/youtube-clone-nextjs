@@ -1,0 +1,32 @@
+#homeWrapper {
+  background-color: #0f0f0f;
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  min-height: 100vh;
+  overflow-y: hidden;
+  height: auto;
+  scrollbar-width: 0;
+}
+
+#main {
+  width: 100%;
+  overflow-x: hidden;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  justify-content: space-between;
+}
+
+.none {
+  display: none;
+}
+
+#section {
+  width: 80%;
+}
+
+#header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}

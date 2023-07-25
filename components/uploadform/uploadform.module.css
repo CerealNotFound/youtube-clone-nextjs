@@ -1,0 +1,60 @@
+#videoForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  width: 80%;
+}
+
+#inputTitle,
+#inputThumbnail {
+  background-color: hsla(0, 100%, 100%, 0.08);
+  border: 1px solid hsl(0, 0%, 18.82%);
+  color: hsla(0, 100%, 100%, 0.88);
+  border-radius: 2%/20%;
+  margin: 0.2rem;
+  width: 100%;
+  padding: 0.5rem;
+}
+
+#inputTitle {
+  margin-top: 1rem;
+}
+
+#inputTitle:focus {
+  outline: none;
+  border: 1px solid #3ea6ff;
+}
+
+#inputThumbnail:focus {
+  outline: none;
+  border: 1px solid #3ea6ff;
+}
+
+#submit {
+  color: #fff;
+  border-radius: 2%/10%;
+  background-color: #3ea6ff;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  border: none;
+  margin: 1rem;
+}
+
+#selectInput {
+  display: none;
+}
+
+#selectButton {
+  display: block;
+  width: 6rem;
+  margin-top: 1rem;
+  border-radius: 1.5%/5%;
+  line-height: 0.5rem;
+  padding: 0 0.6rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0d0d0d;
+  background-color: #3ea6ff;
+}

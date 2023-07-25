@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600&family=Poppins:wght@400;500&display=swap");
+
+.links {
+  text-decoration: none;
+}
+
+#loginWrapper,
+#signupWrapper {
+  position: absolute;
+  box-sizing: border-box;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  width: 30%;
+  height: 75vh;
+  border: 1px solid grey;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#googleLogo {
+  box-sizing: border-box;
+  margin: 1rem;
+  width: 6rem;
+  height: auto;
+}
+
+#signInToText,
+#signupToText {
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.loginWrapperText,
+.signupWrapperText {
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 0;
+}
+
+#loginForm,
+#signupForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  width: 80%;
+
+  .formOtheractions {
+    color: #1a73e8;
+    width: 100%;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  #guestModeWrapper {
+    width: 100%;
+    margin: 1rem;
+  }
+
+  #guestModeText {
+    color: #5f6368;
+    font-size: 0.85rem;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  #formActionsWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 1rem;
+
+    #submit {
+      background-color: #1a73e8;
+      color: #fff;
+      border-radius: 4px;
+      padding: 0.6rem 1.5rem;
+      border: 1px solid white;
+      font-weight: bold;
+    }
+  }
+}
+
+.inputBordered {
+  box-sizing: border-box;
+  padding: 0.8rem;
+  font-size: 0.95rem;
+  margin: 0.3rem;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid rgba(128, 128, 128, 0.803);
+}
+
+#createAccount,
+#signinAccountButton {
+  color: #1a73e8;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.4rem;
+  margin-left: -0.4rem;
+  border-radius: 5px;
+}
+
+#createAccount:hover {
+  cursor: pointer;
+  background-color: #115fc611;
+  color: #1763c6;
+}
+
+#signinAccountButton:hover {
+  background-color: #115fc611;
+  color: #1763c6;
+}
+
+#createAccount:active {
+  background-color: #b2d2fc81;
+}
+
+#signinAccountButton:active {
+  background-color: #b2d2fc81;
+}
