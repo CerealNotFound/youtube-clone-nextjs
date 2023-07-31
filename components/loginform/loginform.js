@@ -54,9 +54,7 @@ const LoginForm = () => {
         console.log(userData);
         if (userData) {
           await user.changeUser(userData);
-          if (user.user) {
-            router.push("/home");
-          }
+          router.push("/home");
         }
       }}
     >

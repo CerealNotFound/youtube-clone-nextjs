@@ -1,145 +1,154 @@
 "use client";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "@/app/context/userContext";
 import styles from "./uploadform.module.css";
-import { getData, user } from "./endpoints";
+import { getData, getUser, getUrl } from "./endpoints";
 
-// const user = JSON.parse(Window.localStorage.getItem("user"));
-
-let isVideo = false;
-// let idTracker =
-// idTracker += 1;
-let formattedDuration;
-
-const formatDuration = (duration) => {
-  const minutes = Math.floor(duration / 60);
-  const seconds = Math.floor(duration % 60);
-
-  const formattedMinutes = String(minutes).padStart(2, "0");
-  const formattedSeconds = String(seconds).padStart(2, "0");
-
-  return `${formattedMinutes}:${formattedSeconds}`;
+const userProvider = async (username) => {
+  try {
+    const userData = await getUser(username);
+    console.log(userData);
+    return userData;
+  } catch (err) {
+    console.error(`Error occoured while getting users: ${err}`);
+  }
 };
 
-let uploaded_on;
-
 const UploadForm = () => {
-  const videos = getData();
+  const [title, setTitle] = useState("");
+  const [thumbnail, setThumbnail] = useState("");
+  const [duration, setDuration] = useState("");
 
-  const sortedVideos = videos.sort((a, b) => a.id - b.id);
-  const videoIdTracker = sortedVideos[sortedVideos.length - 1].id;
+  const userCred = useContext(UserContext);
 
-  const formatDate = (date) => {
-    var d = new Date(date),
-      month = "" + (d.getMonth() + 1),
-      day = "" + d.getDate(),
-      year = d.getFullYear();
-
-    if (month.length < 2) month = "0" + month;
-    if (day.length < 2) day = "0" + day;
-
-    return [year, month, day].join("-");
+  const user = async () => {
+    const user = await userProvider(userCred.user.user.user_metadata.name);
+    return user;
   };
 
-  let file;
-
-  const fileHandler = () => {
-    file = document.querySelector("#selectInput").files[0];
-    const video = document.createElement("video");
-    console.log(file);
-
-    //Wait for metadata to be loaded
-    video.addEventListener("loadedmetadata", () => {
-      //access the duration of the video
-      let notFormattedduration = video.duration;
-      formattedDuration = formatDuration(notFormattedduration);
-    });
-
-    video.preload = "metadata"; // Set preload to 'metadata' to only load video metadata, not the whole video file
-
-    video.src = URL.createObjectURL(file);
-
-    // Attach the video element to the document temporarily to trigger metadata loading
-    document.body.appendChild(video);
-
-    // Remove the video element from the document after metadata is loaded
-    video.addEventListener("loadeddata", function () {
-      document.body.removeChild(video);
-      isVideo = true;
-    });
-  };
-
-  const userCreds = useContext(UserContext);
-
-  const user = getUser(userCreds.user.user_metadata.name);
-  console.log(user);
-  const uploadHandler = async () => {
-    let [title, setTitle] = useState("");
-    let [thumbnail, setThumbnail] = useState("");
-
-    if (title && thumbnail && isVideo) {
-      let url;
-      let videoName;
-
-      try {
-        const response = await fetch("http://localhost:3000/api/upload/s3");
-        const data = await response.json();
-        console.log(data);
-        url = data.uploadURL;
-        videoName = `${data.videoName}.mp4`;
-        console.log(data.uploadURL);
-        console.log(data.videoName);
-      } catch (error) {
-        alert("Failed to fetch link");
-        console.error("Failed to fetch link", error);
+  const getVideoDuration = (file) => {
+    return new Promise((resolve, reject) => {
+      if (!file || !file.type.startsWith("video/")) {
+        reject(new Error("Invalid video file"));
       }
 
-      try {
-        await fetch(url, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          body: file,
-        });
+      const videoElement = document.createElement("video");
+      videoElement.preload = "metadata";
 
-        console.log(file);
-      } catch (error) {
-        alert("Failed to upload video", error);
-        // return;
-      }
-
-      uploaded_on = formatDate(new Date());
-      const data = {
-        id: idTracker,
-        title: title,
-        thumbnail: thumbnail,
-        duration: formattedDuration,
-        creator: user.username,
-        avatar: user.avatar,
-        views: 0,
-        uploaded_on: uploaded_on,
-        verified: user.is_verified,
-        video: videoName,
+      videoElement.onloadedmetadata = () => {
+        const videoDuration = videoElement.duration;
+        resolve(videoDuration);
       };
-    }
+
+      videoElement.onerror = (error) => {
+        reject(error);
+      };
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        videoElement.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const videoIdProvider = async () => {
+    const videos = await getData();
+    const sortedVideos = videos.sort((a, b) => a.id - b.id);
+    const videoId = sortedVideos[sortedVideos.length - 1].id;
+    return videoId;
+  };
+
+  const uploadHandler = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const id = await videoIdProvider();
+        const creator = await user();
+        const url = await getUrl();
+        const currentDate = new Date().toISOString();
+        const file = document.getElementById(styles.selectInput).files[0];
+
+        const data = {
+          id: id + 1,
+          title: title,
+          thumbnail: thumbnail,
+          duration: duration,
+          creator: creator[0].username,
+          avatar: creator[0].avatar,
+          views: 0,
+          uploaded_on: currentDate,
+          verified: creator[0].is_verified,
+          video: url.videoName,
+        };
+
+        try {
+          await fetch(url.uploadURL, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+            body: file,
+          });
+        } catch (error) {
+          reject("Failed to upload video", error);
+        }
+
+        try {
+          await fetch("http://localhost:3000/api/videos", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          });
+        } catch (error) {
+          reject("Failed to post video to Supabase", error);
+        }
+
+        resolve("Video posted successfully 😎🔥");
+      } catch (error) {
+        reject(error);
+      }
+    });
   };
 
   return (
-    <form id={styles.videoForm}>
+    <form
+      id={styles.videoForm}
+      onSubmit={(event) => {
+        event.preventDefault();
+        uploadHandler()
+          .then((response) => {
+            console.log("Successfully fetched data");
+            alert(response);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }}
+    >
       <input
         type="file"
         id={styles.selectInput}
-        onChange={() => {
-          fileHandler();
+        onChange={(event) => {
+          getVideoDuration(event.target.files[0])
+            .then((duration) => {
+              console.log("Video duration:", duration);
+              setDuration(duration);
+            })
+            .catch((error) => {
+              console.error("Error fetching video duration:", error);
+            });
         }}
       />
-      <label htmlFor="selectInput" id={styles.selectButton}>
+      <label htmlFor={styles.selectInput} id={styles.selectButton}>
         <p>SELECT FILES</p>
       </label>
       <input
         id={styles.inputTitle}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => {
+          setTitle(e.target.value);
+        }}
         type="text"
         placeholder="Title"
       />
@@ -149,14 +158,7 @@ const UploadForm = () => {
         type="text"
         placeholder="Thumbnail"
       />
-      <input
-        id={styles.submit}
-        type="submit"
-        onSubmit={(event) => {
-          event.preventDefault();
-          uploadHandler();
-        }}
-      />
+      <input id={styles.submit} type="submit" />
     </form>
   );
 };

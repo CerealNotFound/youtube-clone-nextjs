@@ -48,10 +48,13 @@ const uniformDate = (date) => {
   return formattedDate;
 };
 
+let videoIdTracker;
+
 const Videos = async () => {
   const videos = await getData();
 
   const sortedVideos = videos.sort((a, b) => a.id - b.id);
+  videoIdTracker = sortedVideos[sortedVideos.length - 1].id;
 
   return (
     <div id={styles.videos}>
@@ -102,4 +105,5 @@ const Videos = async () => {
   );
 };
 
+export { videoIdTracker };
 export default Videos;
