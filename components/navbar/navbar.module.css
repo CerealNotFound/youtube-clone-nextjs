@@ -123,39 +123,3 @@
   background-color: hsla(0, 100%, 100%, 0.15);
   cursor: pointer;
 }
-
-#userAvatar {
-  width: 2rem;
-  height: auto;
-  margin: 0.5rem;
-  cursor: pointer;
-  border-radius: 50%;
-}
-
-.logoutModalHidden {
-  display: none;
-}
-
-.logoutModal {
-  display: block;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20vw;
-  height: 10vh;
-  right: 1vw;
-  top: 3.5vw;
-  border-radius: 8px;
-  border: 1px solid hsl(0, 0%, 18.82%);
-  background: hsl(0, 0%, 7%);
-}
-
-#logoutButton {
-  background-color: rgb(192, 0, 0);
-  color: #fff;
-  font-weight: bold;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 3px;
-}

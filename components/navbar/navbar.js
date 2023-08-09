@@ -6,8 +6,7 @@ import {
   Create,
   Notification,
 } from "../../assets/Icons";
-//   import { onNavigate } from "../scripts/router.js";
-//   import { User } from "./user.js";
+import { User } from "@/components/user/user";
 //   import { Logout } from "./logout.js";
 import styles from "./navbar.module.css";
 import Link from "next/link";
@@ -48,7 +47,7 @@ const Navbar = () => {
           <Notification />
         </div>
         <div id={styles.userContainer}>
-          {/* {User()} */}
+          <User />
           {/* {Logout()} */}
         </div>
       </div>

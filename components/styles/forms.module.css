@@ -54,7 +54,7 @@
     color: #1a73e8;
     width: 100%;
     font-size: 0.85rem;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   #guestModeWrapper {
@@ -82,7 +82,7 @@
       border-radius: 4px;
       padding: 0.6rem 1.5rem;
       border: 1px solid white;
-      font-weight: bold;
+      font-weight: 700;
     }
   }
 }

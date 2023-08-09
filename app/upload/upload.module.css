@@ -1,7 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-
 #uploadSection {
-  font-family: "Roboto", sans-serif;
   color: #fff;
   background-color: #282828;
   width: 100vw;
@@ -26,7 +23,7 @@
     #pageTitle {
       padding: 0 0.7rem;
       font-size: 1.25rem;
-      font-weight: bold;
+      font-weight: 700;
     }
   }
 
