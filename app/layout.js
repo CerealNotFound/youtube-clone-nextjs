@@ -13,16 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <UserProvider>
       <html lang="en">
-        <body>
-          <style>
-            {`
-          body::-webkit-scrollbar {
-            display: none;
-          }
-        `}
-          </style>
-          {children}
-        </body>
+        <body>{children}</body>
       </html>
     </UserProvider>
   );
